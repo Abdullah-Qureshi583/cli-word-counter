@@ -9,6 +9,7 @@ const userChoice = await inquirer.prompt({
     choices: [
         "count word",
         "count letter",
+        "count sentences",
         "count total words",
         "count total letters",
     ]
@@ -63,6 +64,23 @@ if (userChoice.choices === "count letter") {
         }
     }
     console.log(chalk.bgBlackBright(`The "${userLetterAns}" is present ${count} time in your paragrah`));
+}
+// if user choice is "count sentences"
+if (userChoice.choices === "count sentences") {
+    // Asking the user to enter the paragraph
+    const userString = await inquirer.prompt({
+        name: "strings",
+        type: "input",
+        message: chalk.bgCyan("Enter your paragraph"),
+    });
+    let userStringAns = userString.strings;
+    let count = 0;
+    for (let i = 0; i < userStringAns.length; i++) {
+        if (userStringAns[i] == "." && userStringAns[i + 1] == " ") {
+            count++;
+        }
+    }
+    console.log(chalk.bgBlackBright(`There are total ${count} sentences in your paragrah`));
 }
 // if user choice is "count total words"
 if (userChoice.choices === "count total words") {
